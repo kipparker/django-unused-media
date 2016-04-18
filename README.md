@@ -46,6 +46,14 @@ For example, to keep `.gitignore` and `*.png` files you can use:
 ./manage.py cleanup_unused_media --exclude .gitignore --exclude *.png
 ```
 
+`-f`, `--folder` 
+
+If you only need to check a particular folder for unused images, you can pass in the folder name. As above, can use multiple options in one command.
+
+```
+./manage.py cleanup_unused_media --folder images
+```
+
 
 # Tests
 At first make sure that you are in virtualenv.
