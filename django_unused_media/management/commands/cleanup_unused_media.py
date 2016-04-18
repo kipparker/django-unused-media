@@ -27,9 +27,16 @@ class Command(BaseCommand):
                             default=[],
                             help='Exclude files by mask (only * is supported), can use multiple --exclude')
 
-    def handle(self, *args, **options):
+        parser.add_argument('-f', '--folder',
+                            dest='folder',
+                            action='append',
+                            default=[],
+                            help='Only include named folders')
 
-        unused_media = get_unused_media(options.get('exclude') or [])
+    def handle(self, *args, **options):
+        exclusions = options.get('exclude', [])
+        folders = options.get('folder', [])
+        unused_media = get_unused_media(exclusions, folders)
 
         if not unused_media:
             self.stdout.write('Nothing to delete. Exit')

@@ -104,6 +104,16 @@ class UtilsTestCase(BaseTestCase):
             .Not.to_include('.file2.txt')\
             .Not.to_include('test.txt')
 
+    def test_get_all_media_with_folder(self):
+        a_file = 'a/file.txt'
+        b_file = 'b/file.txt'
+        create_file_and_write(a_file)
+        create_file_and_write(b_file)
+        expect(_get_all_media(folders=['a']))\
+            .to_be_instance_of(list).to_length(1)\
+            .to_include(a_file)\
+            .Not.to_include(b_file)
+
     def test_get_unused_media_empty(self):
         expect(get_unused_media()).to_be_empty()
 
